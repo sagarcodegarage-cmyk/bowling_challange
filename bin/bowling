@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+require_relative "../lib/bowling_game"
+
+begin
+  puts BowlingGame.from_text(ARGF.read).score
+rescue BowlingGame::InvalidGameError => e
+  warn "Invalid game: #{e.message}"
+  exit 1
+rescue Errno::ENOENT
+  warn "File not found: #{ARGF.filename}"
+  exit 1
+end
